@@ -10,7 +10,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <h1>We now have Auth!</h1>
       </header>
-      <AmplifySignOut />
+      <button onClick={signOut}>Sign out</button>
     </div>
   );
 }
