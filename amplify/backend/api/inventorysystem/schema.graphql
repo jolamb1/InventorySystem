@@ -10,7 +10,7 @@ type Location @model {
 
 type Inventory @model {
   id: ID!
-  item: Item
+  item: Item!
   quantity: Int!
 }
 
