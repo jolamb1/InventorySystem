@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { API } from 'aws-amplify';
-import { listLocations, getLocation, listItems, } from './graphql/queries';
-import AddLocation from './AddLocation';
-import AddItems from './AddItems';
-import AddInventory from './AddInventory';
-import { Authenticator } from '@aws-amplify/ui-react';
+import { listLocations, listItems } from './graphql/queries';
 import { createLocation as createLocationMutation, updateLocation as updateLocationMutation, deleteLocation as deleteLocationMutation} from './graphql/mutations';
 import { createInventory as createInventoryMutation, updateInventory as updateInventoryMutation, deleteInventory as deleteInventoryMutation} from './graphql/mutations';
 
-
-function App() {
-	/*const initialFormState = { inventoryItemId:'' , locationInventoryId:'', quantity:'' }
+export default function AddInventory()  {
+	const initialFormState = { inventoryItemId:'' , locationInventoryId:'', quantity:'' }
 	const [locationList, setLocationList] = useState([]);
 	const [itemList, setItemList] = useState([]);
 	const [invFormData, setInvFormData] = useState(initialFormState);
-	//const [inventoryList, setInventoryList] = useState([]);
+	
 	
 	useEffect(() => {
     fetchLocations();
@@ -38,22 +33,51 @@ function App() {
 		await API.graphql({ query: createInventoryMutation, variables: { input: invFormData } });
 		//setItemList([ ...itemList, invFormData ]);
 		setInvFormData(initialFormState);
-	}*/
+	}
 	
 	
 	
 	return (
-    <Authenticator>
-      {({ signOut, user }) => (
-        <div className="App">
-			<AddInventory />
-			<AddItems />
-			<AddLocation />
-          <button onClick={signOut}>Sign out</button>
-        </div>
-      )}
-    </Authenticator>
+    
+      
+        <div className="AddInventory">
+			<h1>Inventory Management</h1>
+			
+			{
+				<div>
+				<h2>Add Inventory</h2>
+				
+				<select name="locSelect" id="locSelect"
+					onChange={e => setInvFormData({ ...invFormData, 'locationInventoryId': e.target.value})}
+					>
+				<option value='' selected>Location</option>
+				{
+			locationList.map((loc) => (
+                <option key={loc.id} value={loc.id}>{loc.name}</option>
+				))
+				}	
+				</select>
+				
+				<select name="itemSelect" id="itemSelect"
+					onChange={e => setInvFormData({ ...invFormData, 'inventoryItemId': e.target.value})}>
+					<option value='' selected>Item</option>
+					{
+						itemList.map((item) => (
+							<option key={item.id} value={item.id}>{item.name}</option>
+							))
+							}
+					</select>
+					<input
+						onChange={e => setInvFormData({ ...invFormData, 'quantity': e.target.value})}
+						placeholder="Quantity"
+						value={invFormData.quantity}
+						/>
+					<button onClick={() => createNewInventory()}>Add Inventory</button>
+				</div>
+			
+			}
+		</div>	
+    
   );
 }
 
-export default App;

@@ -10,7 +10,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { createLocation as createLocationMutation, updateLocation as updateLocationMutation, deleteLocation as deleteLocationMutation} from './graphql/mutations';
 
-const initialFormState = { name: '' }
+var initialFormState = { name: '',  }
 
 export default function AddLocation() {
 	

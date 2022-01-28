@@ -13,6 +13,7 @@ export const getLocation = /* GraphQL */ `
           createdAt
           updatedAt
           locationInventoryId
+          inventoryItemId
         }
         nextToken
       }
@@ -53,9 +54,19 @@ export const getInventory = /* GraphQL */ `
         updatedAt
       }
       quantity
+      location {
+        id
+        name
+        inventory {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
       locationInventoryId
+      inventoryItemId
     }
   }
 `;
@@ -76,9 +87,16 @@ export const listInventories = /* GraphQL */ `
           updatedAt
         }
         quantity
+        location {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         locationInventoryId
+        inventoryItemId
       }
       nextToken
     }
@@ -97,11 +115,19 @@ export const getItem = /* GraphQL */ `
 `;
 export const listItems = /* GraphQL */ `
   query ListItems(
+    $id: ID
     $filter: ModelItemFilterInput
     $limit: Int
     $nextToken: String
+    $sortDirection: ModelSortDirection
   ) {
-    listItems(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listItems(
+      id: $id
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
       items {
         id
         name

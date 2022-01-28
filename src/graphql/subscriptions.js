@@ -13,6 +13,7 @@ export const onCreateLocation = /* GraphQL */ `
           createdAt
           updatedAt
           locationInventoryId
+          inventoryItemId
         }
         nextToken
       }
@@ -33,6 +34,7 @@ export const onUpdateLocation = /* GraphQL */ `
           createdAt
           updatedAt
           locationInventoryId
+          inventoryItemId
         }
         nextToken
       }
@@ -53,6 +55,7 @@ export const onDeleteLocation = /* GraphQL */ `
           createdAt
           updatedAt
           locationInventoryId
+          inventoryItemId
         }
         nextToken
       }
@@ -73,9 +76,19 @@ export const onCreateInventory = /* GraphQL */ `
         updatedAt
       }
       quantity
+      location {
+        id
+        name
+        inventory {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
       locationInventoryId
+      inventoryItemId
     }
   }
 `;
@@ -91,9 +104,19 @@ export const onUpdateInventory = /* GraphQL */ `
         updatedAt
       }
       quantity
+      location {
+        id
+        name
+        inventory {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
       locationInventoryId
+      inventoryItemId
     }
   }
 `;
@@ -109,9 +132,19 @@ export const onDeleteInventory = /* GraphQL */ `
         updatedAt
       }
       quantity
+      location {
+        id
+        name
+        inventory {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
       locationInventoryId
+      inventoryItemId
     }
   }
 `;

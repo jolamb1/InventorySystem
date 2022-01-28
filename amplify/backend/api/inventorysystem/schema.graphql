@@ -10,13 +10,14 @@ type Location @model {
 
 type Inventory @model {
   id: ID!
-  item: Item!
+  item: Item! @hasOne
   quantity: Int!
+  location: Location @belongsTo
 }
 
 type Item @model {
-  id: ID!
-  name: String!
+  id: ID! @primaryKey
+  name: String! 
   unitPrice: Float!
 }
 
