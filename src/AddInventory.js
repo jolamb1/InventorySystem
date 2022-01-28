@@ -6,7 +6,7 @@ import { createLocation as createLocationMutation, updateLocation as updateLocat
 import { createInventory as createInventoryMutation, updateInventory as updateInventoryMutation, deleteInventory as deleteInventoryMutation} from './graphql/mutations';
 
 export default function AddInventory()  {
-	const initialFormState = { inventoryItemId:'' , locationInventoryId:'', quantity:'' }
+	const initialFormState = { inventoryItemId:'' , locationInventoryId:'', quantity:'' };
 	const [locationList, setLocationList] = useState([]);
 	const [itemList, setItemList] = useState([]);
 	const [invFormData, setInvFormData] = useState(initialFormState);
@@ -41,16 +41,16 @@ export default function AddInventory()  {
     
       
         <div className="AddInventory">
-			<h1>Inventory Management</h1>
+			
 			
 			{
 				<div>
 				<h2>Add Inventory</h2>
 				
-				<select name="locSelect" id="locSelect"
+				<select name="locSelect" id="locSelect" value=""
 					onChange={e => setInvFormData({ ...invFormData, 'locationInventoryId': e.target.value})}
 					>
-				<option value='' selected>Location</option>
+				<option value='' >Location</option>
 				{
 			locationList.map((loc) => (
                 <option key={loc.id} value={loc.id}>{loc.name}</option>
@@ -58,9 +58,9 @@ export default function AddInventory()  {
 				}	
 				</select>
 				
-				<select name="itemSelect" id="itemSelect"
+				<select name="itemSelect" id="itemSelect" value=""
 					onChange={e => setInvFormData({ ...invFormData, 'inventoryItemId': e.target.value})}>
-					<option value='' selected>Item</option>
+					<option value='' >Item</option>
 					{
 						itemList.map((item) => (
 							<option key={item.id} value={item.id}>{item.name}</option>

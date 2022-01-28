@@ -5,6 +5,7 @@ import { listLocations, getLocation, listItems, } from './graphql/queries';
 import AddLocation from './AddLocation';
 import AddItems from './AddItems';
 import AddInventory from './AddInventory';
+import ViewInventory from './ViewInventory';
 import { Authenticator } from '@aws-amplify/ui-react';
 import { createLocation as createLocationMutation, updateLocation as updateLocationMutation, deleteLocation as deleteLocationMutation} from './graphql/mutations';
 import { createInventory as createInventoryMutation, updateInventory as updateInventoryMutation, deleteInventory as deleteInventoryMutation} from './graphql/mutations';
@@ -46,6 +47,7 @@ function App() {
     <Authenticator>
       {({ signOut, user }) => (
         <div className="App">
+			<ViewInventory />
 			<AddInventory />
 			<AddItems />
 			<AddLocation />
