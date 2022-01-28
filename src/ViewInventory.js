@@ -35,13 +35,15 @@ export default function ViewInventory()  {
 	}
 	
 	async function getLocation() {
-		
-		//const apiData = await API.graphql({ query: listLocations, variables: { filter: filter }});
-		
+		if(!invFormData) return;
+		var id = invFormData.locationInventoryId;
 		const apiData = await API.graphql({ query: listInventories });
 		setInvList(apiData.data.listInventories.items);
-		//const newInvList = invList.filter(inv => inv.locationInventoryId !== invFormData.locationInventoryId);
-		//setInvList(newInvList);
+		
+		console.log("id = "+ id);
+		console.log("locationInventoryId= "+invList[0].locationInventoryId);
+		const newInvList = invList.filter(inv => inv.locationInventoryId === id);
+		setInvList(newInvList);
 		
 		//setInvFormData(initialFormState);
 	}
@@ -59,7 +61,8 @@ export default function ViewInventory()  {
 				<h1>View Inventory</h1>
 				<h2>Select a Location</h2>
 				
-				<select name="locSelect" id="locSelect" 
+				<select name="locSelect" id="locSelect"
+				//				
 					onChange={e=> setInvFormData({ ...invFormData, 'locationInventoryId': e.target.value}) }
 					>
 				<option value='' >Location</option>
@@ -69,7 +72,7 @@ export default function ViewInventory()  {
 				))
 				}	
 				</select>
-				<button onClick={() => getLocation(invFormData)}>Show Inventory</button>
+				<button onClick={() => getLocation()}>Show Inventory</button>
 				
 				
 				<Table size="small">
